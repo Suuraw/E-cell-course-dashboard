@@ -1,18 +1,29 @@
-import { ChevronRight } from 'lucide-react';
+import React from "react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { menuItems, courseContents } from "../data/sidebarData";
 
-import { menuItems, courseContents } from '../data/sidebarData';
+interface SidebarProps {
+  openSection: number | null;
+  toggleSection: (index: number) => void;
+}
 
-function Sidebar() {
+const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection }) => {
   return (
     <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col">
       <div className="p-4 flex-shrink-0">
         <Button className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors">
-          <img width="20" height="20" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo" className="mr-2" />
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/color/48/google-logo.png"
+            alt="google-logo"
+            className="mr-2"
+          />
           Login with Google
         </Button>
       </div>
-      
+
       <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
         <nav className="p-4 space-y-6">
           <div className="space-y-2">
@@ -26,9 +37,9 @@ function Sidebar() {
               </div>
             ))}
           </div>
-          
+
           <hr className="border-gray-300" />
-          
+
           <div>
             <h3 className="text-gray-500 text-xs font-semibold mb-3 uppercase tracking-wider">
               Course Contents
@@ -38,12 +49,22 @@ function Sidebar() {
                 <div
                   key={index}
                   className="flex items-center justify-between p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors"
+                  onClick={() => toggleSection(index)}
                 >
                   <div className="flex items-center space-x-3">
                     <span className="text-lg bg-white p-1 rounded-md shadow-sm">{content.icon}</span>
-                    <span className="text-sm font-semibold">{content.label}</span>
+                    <button
+                      className="text-sm font-semibold"
+                      
+                    >
+                      {content.label}
+                    </button>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  {openSection === index ? (
+                    <ChevronRight className="w-4 h-4 text-blue-500" />
+                  ) : (
+                    <ChevronRight className="w-4 h-4 text-gray-500" />
+                  )}
                 </div>
               ))}
             </div>
@@ -52,6 +73,6 @@ function Sidebar() {
       </div>
     </aside>
   );
-}
+};
 
 export default Sidebar;

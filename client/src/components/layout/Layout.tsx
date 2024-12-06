@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import CourseAnnouncement from "../course/CourseAnnouncement";
@@ -10,14 +10,22 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [openSection, setOpenSection] = useState<number | null>(null);
+
+  const toggleSection = (index: number) => {
+    setOpenSection(openSection === index ? null : index);
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar />
-      
+      <Navbar
+      openSection={openSection} toggleSection={toggleSection}
+      />
+
       <div className="flex-1 flex">
         <div className="hidden md:block w-64 flex-shrink-0">
           <div className="fixed h-screen w-64">
-            <Sidebar />
+            <Sidebar openSection={openSection} toggleSection={toggleSection} />
           </div>
         </div>
 
@@ -27,15 +35,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="p-4">
-            <Dashboard />
+            <Dashboard openSection={openSection} toggleSection={toggleSection} />
           </div>
-          <div className="p-4 mt-5">
-           <Footer/>
+          <div className="p-4">
+            <Footer />
           </div>
 
-          <main className="p-4">
-            {children}
-          </main>
+          <main className="p-4">{children}</main>
         </div>
       </div>
     </div>

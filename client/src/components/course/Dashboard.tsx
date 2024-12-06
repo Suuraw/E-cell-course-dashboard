@@ -3,25 +3,21 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Placeholder } from "./Placeholder";
 import CourseNav from "./CourseNav";
-import { sections, weekData } from '../data/courseData';
+import { sections, weekData } from "../data/courseData";
 
-const Dashboard: React.FC = () => {
-  const [openSection, setOpenSection] = useState<number | null>(null);
+interface DashboardProps {
+  openSection: number | null;
+  toggleSection: (index: number) => void;
+}
 
-  const toggleSection = (index: number) => {
-    setOpenSection(openSection === index ? null : index);
-  };
-
+const Dashboard: React.FC<DashboardProps> = ({ openSection, toggleSection }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm">
       <div className="border rounded-lg overflow-hidden">
         {sections.map((section, index) => (
-          <div
-            key={index}
-            className="border-b last:border-b-0"
-          >
+          <div key={index} className="border-b last:border-b-0">
             <button
-              className={` flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
+              className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
                 openSection === index
                   ? "text-blue-600 bg-blue-50"
                   : "text-black hover:bg-gray-100"
@@ -29,7 +25,6 @@ const Dashboard: React.FC = () => {
               onClick={() => toggleSection(index)}
             >
               <span className="flex items-center font-bold pl-2">
-
                 {section.title}
               </span>
               {openSection === index ? (
@@ -47,7 +42,7 @@ const Dashboard: React.FC = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <div className="border-t border-gray-100 bg-white p-4">
-                    <div className="overflow-y-auto">
+                    <div className="overflow-x-auto sm:overflow-x-hidden">
                       <CourseNav />
                       {index === 0 ? (
                         weekData.map((day, idx) => (
@@ -76,3 +71,5 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
+

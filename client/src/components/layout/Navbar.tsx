@@ -3,7 +3,12 @@ import { Menu } from 'lucide-react';
 import { Button } from "../ui/button";
 import Sidebar from './Sidebar';
 
-const Navbar: React.FC = () => {
+interface NavbarProps
+{
+openSection:number|null;
+toggleSection:(index:number)=>void;
+}
+const Navbar: React.FC<NavbarProps> = ({openSection,toggleSection}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -45,7 +50,10 @@ const Navbar: React.FC = () => {
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <Sidebar />
+        <Sidebar 
+        openSection={openSection}
+        toggleSection={toggleSection}
+        />
       </div>
     </>
   );
