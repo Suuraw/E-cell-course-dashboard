@@ -15,12 +15,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const toggleSection = (index: number) => {
     setOpenSection(openSection === index ? null : index);
   };
+  
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar
-      openSection={openSection} toggleSection={toggleSection}
-      />
+      <Navbar openSection={openSection} toggleSection={toggleSection} />
 
       <div className="flex-1 flex">
         <div className="hidden md:block w-64 flex-shrink-0">
@@ -35,7 +34,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="p-4">
-            <Dashboard openSection={openSection} toggleSection={toggleSection} />
+            <Dashboard
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
           </div>
           <div className="p-4">
             <Footer />
