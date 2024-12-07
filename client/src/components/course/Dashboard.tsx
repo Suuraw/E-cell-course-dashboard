@@ -8,10 +8,10 @@ import { sections, weekData } from "../data/courseData";
 interface DashboardProps {
   openSection: number | null;
   toggleSection: (index: number) => void;
-  toggleAssessment:(index:number)=>void;
+
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ openSection, toggleSection,toggleAssessment }) => {
+const Dashboard: React.FC<DashboardProps> = ({ openSection, toggleSection }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm">
       <div className="border rounded-lg overflow-hidden">
