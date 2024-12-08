@@ -17,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({openSection,toggleSection}) => {
 
   return (
     <>
-      <nav className="sticky top-0  bg-black text-white shadow-md">
+      <nav className="sticky top-0  bg-black text-white shadow-md z-10">
         <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             <span className="text-lg md:text-xl font-bold">E-CELL</span>
