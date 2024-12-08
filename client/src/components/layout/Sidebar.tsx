@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection }) => {
     setIsModalOpen((prev) => !prev);
   };
   return (
-    <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col">
+    <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col ">
       <div className="p-4 flex-shrink-0">
         <Button className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors">
           <img

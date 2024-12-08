@@ -1,14 +1,17 @@
 import React from "react";
+import  ReactDOM  from "react-dom";
 interface LeaderboardProps{
   isModelOpen:boolean
   setIsModelOpen:React.Dispatch<React.SetStateAction<boolean>>
 }
 const Leaderboard:React.FC<LeaderboardProps> = ({isModelOpen,setIsModelOpen}) => {
  
-  return (
-    <>
-      {isModelOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    if(!isModelOpen)
+      return null;
+  return ReactDOM.createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+        style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh" }}
+        >
           <div
             className="relative bg-white w-screen h-screen flex flex-col rounded-none"
           >
@@ -39,9 +42,8 @@ const Leaderboard:React.FC<LeaderboardProps> = ({isModelOpen,setIsModelOpen}) =>
               </button>
             </div>
           </div>
-        </div>
-      )}
-    </>
+        </div>,
+    document.body
   );
 };
 
