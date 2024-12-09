@@ -5,7 +5,7 @@ import { menuItems, courseContents } from "../data/sidebarData";
 import CourseUpdateDiaglogBox from "../dialogbox/CourseUpdate";
 import ScheduleDialog from "../dialogbox/Schedule";
 import Leaderboard from "../dialogbox/LeaderboardDialog";
-
+import LoginDialog from "../dialogbox/Login";
 interface SidebarProps {
   openSection: number | null;
   toggleSection: (index: number) => void;
@@ -16,6 +16,7 @@ const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection }) => {
   const [courseUpdateBtn, updateCourseBtn] = useState(false);
   const [scheduleBtn, updateScheduleBtn] = useState(false);
   const [isModelOpen, setIsModalOpen] = useState(false);
+  const [isOpen,setOpenClose]=useState(false);
   const handleClickForCourseUpdate = () => {
     updateCourseBtn((prev) => !prev);
   };
@@ -29,7 +30,8 @@ const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection }) => {
   return (
     <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col ">
       <div className="p-4 flex-shrink-0">
-        <Button className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors">
+        <Button className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
+         onClick={()=>setOpenClose((prev)=>!prev)}>
           <img
             width="20"
             height="20"
@@ -37,8 +39,11 @@ const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection }) => {
             alt="google-logo"
             className="mr-2"
           />
-          Login with Google
+          Login as Admin
         </Button>
+        {isOpen&&<LoginDialog
+        setOpenClose={setOpenClose}
+        />}
       </div>
 
       <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
