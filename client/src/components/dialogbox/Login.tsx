@@ -15,7 +15,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ setOpenClose,updateLoginStatu
     e.preventDefault();
     // onLogin(email, password);
 
-    const response = await fetch("http://localhost:3000/admin/login", {
+    const response = await fetch("https://dashboard-backend-service.onrender.com/admin/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
