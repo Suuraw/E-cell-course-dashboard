@@ -14,8 +14,8 @@ export const Placeholder: React.FC<PlaceholderProps> = ({ day, description, task
         <div className="w-full md:w-20 mx-2 mb-2 md:mb-0">
           <span className="font-bold">{day}</span>
         </div>
-        <div className="w-full md:w-60 md:pl-10 mb-4 md:mb-0">
-          <p className="text-sm">{description}</p>
+        <div className="w-full  md:w-60 md:pl-10 mb-4 md:mb-0">
+          <p className="text-sm ">{description}</p>
         </div>
         <div className="flex flex-col md:flex-row flex-wrap">
           {tasks.map((task, index) => (

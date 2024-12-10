@@ -2,32 +2,37 @@ import React, { useState } from "react";
 import ReatDom from "react-dom";
 interface LoginDialogProps {
   // isOpen: boolean;
-
+  login:boolean;
+  updateLoginStatus:(status: boolean) => void;
   setOpenClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginDialog: React.FC<LoginDialogProps> = ({ setOpenClose }) => {
-  const [email, setEmail] = useState("");
+const LoginDialog: React.FC<LoginDialogProps> = ({ setOpenClose,updateLoginStatus,login }) => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
     // onLogin(email, password);
 
-    const response = await fetch("https://dashboard-backend-service.onrender.com/login", {
+    const response = await fetch("http://localhost:3000/admin/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     });
+    const data=await response.json();
     if (response.ok) {
-      alert("Login Successfull");
+      alert(data.message);
+      updateLoginStatus(true);
+      setOpenClose(false);
     } else {
       alert("Login failed");
     }
   };
-
+  if(login)
+    return null;
   return ReatDom.createPortal(
     <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
@@ -38,13 +43,13 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ setOpenClose }) => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              Username
             </label>
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />

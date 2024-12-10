@@ -7,8 +7,10 @@ interface NavbarProps
 {
 openSection:number|null;
 toggleSection:(index:number)=>void;
+updateLoginStatus:(status: boolean) => void;
+login:boolean;
 }
-const Navbar: React.FC<NavbarProps> = ({openSection,toggleSection}) => {
+const Navbar: React.FC<NavbarProps> = ({openSection,toggleSection,updateLoginStatus,login}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -53,6 +55,8 @@ const Navbar: React.FC<NavbarProps> = ({openSection,toggleSection}) => {
         <Sidebar 
         openSection={openSection}
         toggleSection={toggleSection}
+        updateLoginStatus={updateLoginStatus}
+        login={login}
       
         />
       </div>

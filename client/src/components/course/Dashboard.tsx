@@ -8,10 +8,12 @@ import { sections, weekData } from "../data/courseData";
 interface DashboardProps {
   openSection: number | null;
   toggleSection: (index: number) => void;
+  login:boolean;
+
 
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ openSection, toggleSection }) => {
+const Dashboard: React.FC<DashboardProps> = ({ openSection, toggleSection,login }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm">
       <div className="border rounded-lg overflow-hidden">
@@ -44,7 +46,9 @@ const Dashboard: React.FC<DashboardProps> = ({ openSection, toggleSection }) => 
                 >
                   <div className="border-t border-gray-100 bg-white p-4">
                     <div className="overflow-x-auto sm:overflow-x-hidden">
-                      <CourseNav />
+                      <CourseNav 
+                      login={login}
+                      />
                       {index === 0 ? (
                         weekData.map((day, idx) => (
                           <Placeholder

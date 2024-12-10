@@ -9,10 +9,11 @@ import LoginDialog from "../dialogbox/Login";
 interface SidebarProps {
   openSection: number | null;
   toggleSection: (index: number) => void;
- 
+  updateLoginStatus:(status: boolean) => void;
+  login:boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection }) => {
+const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection,updateLoginStatus,login }) => {
   const [courseUpdateBtn, updateCourseBtn] = useState(false);
   const [scheduleBtn, updateScheduleBtn] = useState(false);
   const [isModelOpen, setIsModalOpen] = useState(false);
@@ -43,6 +44,8 @@ const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection }) => {
         </Button>
         {isOpen&&<LoginDialog
         setOpenClose={setOpenClose}
+        updateLoginStatus={updateLoginStatus}
+        login={login}
         />}
       </div>
 
