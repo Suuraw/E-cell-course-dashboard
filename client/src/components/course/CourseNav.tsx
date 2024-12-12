@@ -1,19 +1,33 @@
 import React from 'react';
-interface CourseNavProps{
-  login:boolean;
+import WeeklyForm from '../dialogbox/Form';
+
+interface CourseNavProps {
+  login: boolean;
+  editState: boolean;
+  updateEditState: (newState: boolean) => void;
 }
-const CourseNav: React.FC<CourseNavProps> = ({login}) => {
+
+const CourseNav: React.FC<CourseNavProps> = ({ login, editState, updateEditState }) => {
+
   return (
-    <nav className="bg-blue-600 text-white p-4 flex items-center space-x-8 rounded-t-lg ">
-      <div className="font-bold ">WEEK 1</div>
+    <>
+    {editState===true?<WeeklyForm
+    updateEditState={updateEditState}
+    editState={editState}
+    />:null}
+    <nav className="bg-blue-600 text-white p-4 flex items-center space-x-8 rounded-t-lg">
+      <div className="font-bold">WEEK 1</div>
       <div className="flex-1 flex justify-around">
-      <div className="font-semibold">WHAT'S IN THERE</div>
+        <div className="font-semibold">WHAT'S IN THERE</div>
         <div className="font-semibold">TASK 1</div>
         <div className="font-semibold">TASK 2</div>
         <div className="font-semibold">TASK 3</div>
       </div>
-      {login&&<button>✏️</button>}
+      {login && (
+        <button onClick={() => updateEditState(!editState)}>✏️</button>
+      )}
     </nav>
+    </>
   );
 };
 

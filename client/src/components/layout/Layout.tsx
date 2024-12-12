@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import CourseAnnouncement from "../course/CourseAnnouncement";
-import Dashboard from "../course/Dashboard";
+import {Dashboard} from "../course/Dashboard";
 import Footer from "./Footer";
 
 interface LayoutProps {
@@ -12,7 +12,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [openSection, setOpenSection] = useState<number | null>(null);
   const [login,updateLoginStatus]=useState(false);
-
+  const [editState,updateEditState]=useState(false);
   const toggleSection = (index: number) => {
     setOpenSection(openSection === index ? null : index);
   };
@@ -42,6 +42,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               openSection={openSection}
               toggleSection={toggleSection}
               login={login}
+              editState={editState}
+              updateEditState={updateEditState}
             />
           </div>
           <div className="p-4">
