@@ -8,9 +8,9 @@ interface CourseNavProps {
   index:number;
 }
 
-const CourseNav: React.FC<CourseNavProps> = ({ login, editState, updateEditState,index }) => {
+const CourseNav1: React.FC<CourseNavProps> = ({ login, editState, updateEditState,index }) => {
   var endpoint=`week${index+1}`
-  console.log(endpoint)
+//   console.log(endpoint)
   return (
     <>
     {editState===true?<WeeklyForm
@@ -19,12 +19,10 @@ const CourseNav: React.FC<CourseNavProps> = ({ login, editState, updateEditState
     endpoint={endpoint}
     />:null}
     <nav className="bg-blue-600 text-white p-4 flex items-center space-x-8 rounded-t-lg">
-      <div className="font-bold">WEEK {index+1}</div>
+      <div className="font-bold">LINK</div>
       <div className="flex-1 flex justify-around">
-        <div className="font-semibold">WHAT'S IN THERE</div>
-        <div className="font-semibold">TASK 1</div>
-        <div className="font-semibold">TASK 2</div>
-        <div className="font-semibold">TASK 3</div>
+        <div className="font-semibold">DEADLINE</div>
+        <div className="font-semibold">INSTRUCTION</div>
       </div>
       {login && (
         <button onClick={() => updateEditState(!editState)}>✏️</button>
@@ -34,4 +32,4 @@ const CourseNav: React.FC<CourseNavProps> = ({ login, editState, updateEditState
   );
 };
 
-export default CourseNav;
+export default CourseNav1;
