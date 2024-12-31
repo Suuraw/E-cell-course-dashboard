@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { deleteCapstoneData } from "../../api/CourseData";
+import { deleteCapstoneData } from "../../api/dataApi";
 import "primeicons/primeicons.css";
 
 interface CapstoneItemProps {

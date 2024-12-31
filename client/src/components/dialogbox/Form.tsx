@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-
+import { Task } from "../course/Dashboard";
 // Define types for the data structure
 const BACKEND_URL=import.meta.env.VITE_SERVER_URL||"http://localhost:3000";
 interface WeeklyProps {
   editState: boolean;
   updateEditState: (newState: boolean) => void;
   endpoint:string;
-
 }
-
 interface Topic {
   name: string;
   link: string;
 }
-
-interface Task {
-  name: string;
-  topics: Topic[];
-}
-
 interface Day {
   day: string;
   description: string;
