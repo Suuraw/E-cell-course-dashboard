@@ -1,6 +1,6 @@
 import React from 'react';
-import WeeklyForm from '../dialogbox/Form';
-
+import { Pencil } from 'lucide-react'
+import CapstoneForm from '../dialogbox/CapstoneForm';
 interface CourseNavProps {
   login: boolean;
   editState: boolean;
@@ -9,11 +9,14 @@ interface CourseNavProps {
 }
 
 const CourseNav1: React.FC<CourseNavProps> = ({ login, editState, updateEditState,index }) => {
-  var endpoint=`week${index+1}`
-//   console.log(endpoint)
+  var endpoint=``
+  if(index===7)
+    endpoint=`assessment`
+  else
+    endpoint=`capstone`;
   return (
     <>
-    {editState===true?<WeeklyForm
+    {editState===true?<CapstoneForm
     updateEditState={updateEditState}
     editState={editState}
     endpoint={endpoint}
@@ -25,7 +28,7 @@ const CourseNav1: React.FC<CourseNavProps> = ({ login, editState, updateEditStat
         <div className="font-semibold">INSTRUCTION</div>
       </div>
       {login && (
-        <button onClick={() => updateEditState(!editState)}>✏️</button>
+        <button onClick={() => updateEditState(!editState)}><Pencil className="w-5 h-5" /></button>
       )}
     </nav>
     </>

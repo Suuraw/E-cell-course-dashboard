@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 
 // Define types for the data structure
+const BACKEND_URL=import.meta.env.VITE_SERVER_URL||"http://localhost:3000";
 interface WeeklyProps {
   editState: boolean;
   updateEditState: (newState: boolean) => void;
   endpoint:string;
+
 }
 
 interface Topic {
@@ -106,13 +108,13 @@ const WeeklyForm: React.FC<WeeklyProps> = ({ updateEditState, editState,endpoint
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+      const response = await fetch(`${BACKEND_URL}/api/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ weekData }),
       });
       const result = await response.json();
-      if (result) alert("SUCCESSFULL SUBMISSION");
+      if (result.status===200) alert("SUCCESSFULL SUBMISSION");
       window.location.reload();
       updateSubmit(true);
     } catch (error) {

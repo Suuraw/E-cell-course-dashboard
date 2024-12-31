@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReatDom from "react-dom";
+const BACKEND_URL=import.meta.env.VITE_SERVER_URL||"http://localhost:3000/admin/login";
 interface LoginDialogProps {
   // isOpen: boolean;
   login:boolean;
@@ -13,9 +14,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ setOpenClose,updateLoginStatu
   
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
-    // onLogin(email, password);
-    // https://dashboard-backend-service.onrender.com/admin/login
-    const response = await fetch("http://localhost:3000/admin/login", {
+    const response = await fetch(`${BACKEND_URL}/admin/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -14,6 +14,8 @@ import {
   getAssessmentData,
 } from "../../api/CourseData.ts";
 import CourseNav1 from "./CourseNav1.tsx";
+import { CapstoneItem } from "./CapstoneData.tsx";
+import { AssessmentItem } from "./AssessmentData.tsx";
 
 interface DashboardProps {
   openSection: number | null;
@@ -33,6 +35,14 @@ interface DayData {
   description: string;
   tasks: Task[];
 }
+type CapstoneProject = {
+  _id: string;
+  formData: {
+    link: string;
+    deadline: string;
+    instruction: string;
+  };
+};
 
 export const Dashboard: React.FC<DashboardProps> = ({
   openSection,
@@ -46,14 +56,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const [week3, setWeek3Data] = useState<{ weekData: DayData[] } | null>(null);
   const [week4, setWeek4Data] = useState<{ weekData: DayData[] } | null>(null);
   const [week5, setWeek5Data] = useState<{ weekData: DayData[] } | null>(null);
-  const [capstone_project, setCapstoneData] = useState<{
-    weekData: DayData[];
-  } | null>(null);
-  const [assessment, setAssessmentData] = useState<{
-    weekData: DayData[];
-  } | null>(null);
+
+  const [capstone_project, setCapstoneData] = useState<CapstoneProject[]>([]);
+
+  const [assessment, setAssessmentData] = useState<CapstoneProject[]>([])
 
   const [selectedWeek, setSelectedWeek] = useState<string>("1"); // Default to week 1
+  
+  const handleDeleteCap = (id:string) => {
+    setCapstoneData(capstone_project.filter((item) => item._id !== id)); // Update state to remove the deleted item
+  };
+ 
+  const handleDeleteAss=(id:string)=>{
+    setAssessmentData(assessment.filter((item)=>item._id!==id));
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,8 +82,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
         const week5Data = await getWeek5Data();
         const capstoneData = await getCapstoneData();
         const assessmentData = await getAssessmentData();
+        console.log("Hello world");
         if (week1Data === null) {
-          // alert("Database is empty");
+          alert("Database is empty");
         } else {
           setWeek1Data(week1Data.data.weekData);
         }
@@ -92,13 +110,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
         }
         if (capstoneData === null) {
           // alert("Database is Empty")
+          alert("Collection is empty");
         } else {
-          setCapstoneData(capstoneData.data.weekData);
+          setCapstoneData(capstoneData.data);
         }
         if (assessmentData === null) {
           // alert("Database is empty");
         } else {
-          setAssessmentData(assessmentData.data.weekData);
+          setAssessmentData(assessmentData.data);
         }
       } catch (error) {
         console.log(error);
@@ -154,7 +173,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week1 !== null ? (
+                    {week1 !== null&&week1.weekData[0].description!=="" ? (
                       week1.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -210,7 +229,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week2 !== null ? (
+                    {week2 !== null&&week2.weekData[0].description!=="" ? (
                       week2.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -266,7 +285,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week3 !== null ? (
+                    {week3 !== null&&week3.weekData[0].description!=="" ? (
                       week3.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -322,7 +341,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week4 !== null ? (
+                    {week4 !== null&&week4.weekData[0].description!=="" ? (
                       week4.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -377,7 +396,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week5 !== null ? (
+                    {week5 !== null&&week5.weekData[0].description!=="" ? (
                       week5.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -430,16 +449,20 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       login={login}
                       editState={editState}
                       updateEditState={updateEditState}
-                      index={openSection}
+                      index={6}
                     />
-                    {capstone_project !== null ? (
-                      capstone_project.weekData.map((day, idx) => (
-                        <Placeholder
-                          key={idx}
-                          day={day.day}
-                          description={day.description}
-                          tasks={day.tasks}
-                        />
+                    {capstone_project.length!==0? (
+                      capstone_project.map((item,index)=>
+                      (
+                      <CapstoneItem
+                      key={item._id}
+                      link={item.formData.link}
+                      deadline={item.formData.deadline}
+                      instruction={item.formData.instruction}
+                      id={item._id}
+                      isAdmin={login}
+                      onDelete={handleDeleteCap}
+                      />
                       ))
                     ) : (
                       <div className="text-center text-gray-500 py-8">
@@ -481,19 +504,23 @@ export const Dashboard: React.FC<DashboardProps> = ({
               >
                 <div className="border-t border-gray-100 bg-white p-4">
                   <div className="overflow-x-auto sm:overflow-x-hidden">
-                     <CourseNav1
+                    <CourseNav1
                       login={login}
                       editState={editState}
                       updateEditState={updateEditState}
-                      index={openSection}
+                      index={7}
                     />
-                    {assessment !== null ? (
-                      assessment.weekData.map((day, idx) => (
-                        <Placeholder
-                          key={idx}
-                          day={day.day}
-                          description={day.description}
-                          tasks={day.tasks}
+                    {assessment.length!==0 ? (
+                      assessment.map((item,index)=>(
+
+                        <AssessmentItem
+                          key={item._id}
+                          link={item.formData.link}
+                          deadline={item.formData.deadline}
+                          instruction={item.formData.instruction}
+                          id={item._id}
+                          isAdmin={login}
+                          onDelete={handleDeleteAss}
                         />
                       ))
                     ) : (
