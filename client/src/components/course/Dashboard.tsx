@@ -25,7 +25,7 @@ interface DashboardProps {
   updateEditState: (newState: boolean) => void;
 }
 
-export interface Task {
+interface Task {
   name: string;
   topics: { name: string; link: string }[];
 }

@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { Task } from "../course/Dashboard";
+
 // Define types for the data structure
 const BACKEND_URL=import.meta.env.VITE_SERVER_URL||"http://localhost:3000";
 interface WeeklyProps {
   editState: boolean;
   updateEditState: (newState: boolean) => void;
   endpoint:string;
+
 }
+
 interface Topic {
   name: string;
   link: string;
 }
+
+interface Task {
+  name: string;
+  topics: Topic[];
+}
+
 interface Day {
   day: string;
   description: string;
@@ -105,9 +113,11 @@ const WeeklyForm: React.FC<WeeklyProps> = ({ updateEditState, editState,endpoint
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ weekData }),
       });
+      console.log(response);
       const result = await response.json();
-      if (result.status===200) alert("SUCCESSFULL SUBMISSION");
-      window.location.reload();
+      if (result.status===200)
+      alert("SUCCESSFULL SUBMISSION");
+      // window.location.reload();
       updateSubmit(true);
     } catch (error) {
       alert("Error Submitting");
