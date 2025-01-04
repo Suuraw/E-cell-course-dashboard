@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { AnimatedAlert } from "../animation/AnimatedAlert";
 const BACKEND_URL=import.meta.env.VITE_SERVER_URL|| "http://localhost:3000";
 interface CapstoneProps {
     editState: boolean;
@@ -123,6 +123,10 @@ export default function CapstoneForm({
           </form>
         </div>
       </div>
+      {
+
+      <AnimatedAlert message="Submission Successful" type="success" />
+      }
     </div>
   );
 }

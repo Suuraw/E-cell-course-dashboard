@@ -1,5 +1,5 @@
 import React from 'react';
-import WeeklyForm from '../dialogbox/Form';
+import WeeklyForm from '../dialogboxAndForms/WeekDataForm';
 import { Pencil } from 'lucide-react'
 
 interface CourseNavProps {

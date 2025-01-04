@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pencil } from 'lucide-react'
-import CapstoneForm from '../dialogbox/CapstoneForm';
+import CapstoneForm from '../dialogboxAndForms/CapstoneForm';
 interface CourseNavProps {
   login: boolean;
   editState: boolean;

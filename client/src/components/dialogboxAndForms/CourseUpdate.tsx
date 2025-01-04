@@ -16,7 +16,6 @@ const CourseUpdateDiaglogBox:React.FC<CourseUpdateProps>=({courseUpdateBtn,updat
         style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh" }}
         >
           <div className="bg-white rounded-lg shadow-lg md:w-4/6 ">
-            {/* Header */}
             <div className="flex justify-between items-center p-4 border-b border-gray-200 ">
               <h3 className="text-2xl  font-semibold text-gray-800">Course Updates</h3>
               <button

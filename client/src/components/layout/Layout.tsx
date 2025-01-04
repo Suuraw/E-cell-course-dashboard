@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import CourseAnnouncement from "../course/CourseAnnouncement";
@@ -18,7 +18,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     setOpenSection(openSection === index ? null : index);
    
   };
-
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      updateLoginStatus(true);
+    }
+  }, []);
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const BACKEND_API = import.meta.env.VITE_SERVER_URL+"/api" || "http://localhost:3000/api";
+
 //route for getting week 1 data
 export const getWeek1Data=async()=> {
   try {
@@ -126,7 +127,7 @@ export const getAssessmentData=async()=> {
 // Deleting specific capstone data using id as query parameter
 export const deleteCapstoneData=async(id:string)=>{
   try {
-    const response=await axios.delete(`${BACKEND_API}/deleteCaptoneData/${id}`);
+    const response=await axios.delete(`${BACKEND_API}/deleteCapstoneData/${id}`);
     if(response.status===200)
     {
       return "Successfully deleted";

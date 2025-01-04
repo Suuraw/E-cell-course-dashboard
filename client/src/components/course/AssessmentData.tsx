@@ -26,6 +26,7 @@ export const AssessmentItem: React.FC<CapstoneItemProps> = ({
     setIsRemoving(true); // Trigger animation or feedback
     try {
       await deleteAssessmentData(id);
+      console.log("Deleted");
       onDelete(id); // Notify parent to update the state
     } catch (error) {
       console.error("Error deleting item:", error);

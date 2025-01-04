@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { menuItems, courseContents } from "../data/sidebarData";
-import CourseUpdateDiaglogBox from "../dialogbox/CourseUpdate";
-import ScheduleDialog from "../dialogbox/Schedule";
-import Leaderboard from "../dialogbox/LeaderboardDialog";
-import LoginDialog from "../dialogbox/Login";
+import CourseUpdateDiaglogBox from "../dialogboxAndForms/CourseUpdate";
+import ScheduleDialog from "../dialogboxAndForms/Schedule";
+import Leaderboard from "../dialogboxAndForms/LeaderboardDialog";
+import LoginDialog from "../dialogboxAndForms/Login";
 interface SidebarProps {
   openSection: number | null;
   toggleSection: (index: number) => void;
