@@ -173,7 +173,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week1 !== null&&week1.weekData[0].description!=="" ? (
+                    {week1 !== null && week1 !== undefined && week1.weekData && week1.weekData[0] && week1.weekData[0].description !== "" ? (
                       week1.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -229,7 +229,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week2 !== null&&week2.weekData[0].description!=="" ? (
+                    {week2 !== null && week2 !== undefined && week2.weekData && week2.weekData[0] && week2.weekData[0].description !== "" ? (
                       week2.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -285,7 +285,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week3 !== null&&week3.weekData[0].description!=="" ? (
+                    {week3 !== null && week3 !== undefined && week3.weekData && week3.weekData[0] && week3.weekData[0].description !== ""? (
                       week3.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -341,7 +341,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week4 !== null&&week4.weekData[0].description!=="" ? (
+                    {week4 !== null && week4 !== undefined && week4.weekData && week4.weekData[0] && week4.weekData[0].description !== ""? (
                       week4.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
@@ -396,7 +396,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
-                    {week5 !== null&&week5.weekData[0].description!=="" ? (
+                    {week5 !== null && week5 !== undefined && week5.weekData && week5.weekData[0] && week5.weekData[0].description !== "" ? (
                       week5.weekData.map((day, idx) => (
                         <Placeholder
                           key={idx}
