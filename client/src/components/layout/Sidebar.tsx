@@ -42,12 +42,28 @@ const Sidebar: React.FC<SidebarProps> = ({
   const handleToggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
+  const handleLoginToggle = (userType: string) => {
+    if (userType === "admin") {
+      setOpenClose(!isOpen); // Admin login modal toggle
+      if (login) {
+        updateLoginStatus(false); // Admin logout
+        localStorage.clear();
+      }
+    } else if (userType === "user") {
+      setOpenCloseUser(!isOpenUser); // User login modal toggle
+      if (loginUser) {
+        updateLoginStatusUser(false); // User logout
+        localStorage.clear();
+      }
+    }
+};
+
   return (
     <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col ">
       <div className="p-4 flex-shrink-0">
-        <Button
+        {!loginUser&&<Button
           className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
-          onClick={() => setOpenClose((prev) => !prev)}
+          onClick={() => handleLoginToggle("admin")}
         >
           <img
             width="20"
@@ -56,11 +72,11 @@ const Sidebar: React.FC<SidebarProps> = ({
             alt="google-logo"
             className="mr-2"
           />
-          Login as Admin
-        </Button>
+          {login ? "Logout" : "Login as Admin"}
+        </Button>}
         <Button
           className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
-          onClick={() => setOpenCloseUser((prev) => !prev)}
+          onClick={() => handleLoginToggle("user")}
         >
           <img
             width="20"
@@ -69,7 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             alt="google-logo"
             className="mr-2"
           />
-          Login as Users
+          {loginUser ? "Logout" : "Login as User"}
         </Button>
         {isOpen && (
           <LoginDialog

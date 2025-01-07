@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import ReatDom from "react-dom";
 import { AnimatePresence } from "framer-motion";
 import { AnimatedAlert } from "../animation/AnimatedAlert";
-// const BACKEND_URL = import.meta.env.VITE_SERVER_URL+"/admin/login" || "http://localhost:3000";
-const BACKEND_URL= "http://localhost:3000/auth/login";
+const BACKEND_URL = import.meta.env.VITE_SERVER_URL+"/auth/login" || "http://localhost:3000/auth/login";
 interface LoginDialogProps {
-  // isOpen: boolean;
   login: boolean;
   updateLoginStatus: (status: boolean) => void;
   setOpenClose: React.Dispatch<React.SetStateAction<boolean>>;
