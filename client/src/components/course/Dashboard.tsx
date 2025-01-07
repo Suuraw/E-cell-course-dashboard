@@ -23,6 +23,7 @@ interface DashboardProps {
   login: boolean;
   editState: boolean;
   updateEditState: (newState: boolean) => void;
+  loginUser: boolean;
 }
 
 interface Task {
@@ -50,6 +51,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   login,
   editState,
   updateEditState,
+  loginUser,
 }) => {
   const [week1, setWeek1Data] = useState<{ weekData: DayData[] } | null>(null);
   const [week2, setWeek2Data] = useState<{ weekData: DayData[] } | null>(null);
@@ -352,6 +354,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={openSection}
                     />
+
                     {week4 !== null &&
                     week4 !== undefined &&
                     week4.weekData &&
@@ -470,29 +473,38 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={6}
                     />
-                    {capstone_project.length !== 0 ? (
-                      capstone_project.map((item, index) => (
-                        <CapstoneItem
-                          key={index}
-                          link={
-                            item.formData === null ? "" : item.formData.link
-                          }
-                          deadline={
-                            item.formData === null ? "" : item.formData.deadline
-                          }
-                          instruction={
-                            item.formData === null
-                              ? ""
-                              : item.formData.instruction
-                          }
-                          id={item._id}
-                          isAdmin={login}
-                          onDelete={handleDeleteCap}
-                        />
-                      ))
+
+                    {loginUser === true || login === true ? (
+                      capstone_project.length !== 0 ? (
+                        capstone_project.map((item, index) => (
+                          <CapstoneItem
+                            key={index}
+                            link={
+                              item.formData === null ? "" : item.formData.link
+                            }
+                            deadline={
+                              item.formData === null
+                                ? ""
+                                : item.formData.deadline
+                            }
+                            instruction={
+                              item.formData === null
+                                ? ""
+                                : item.formData.instruction
+                            }
+                            id={item._id}
+                            isAdmin={login}
+                            onDelete={handleDeleteCap}
+                          />
+                        ))
+                      ) : (
+                        <div className="text-center text-gray-500 py-8">
+                          Content for {sections[5].title} is not available yet.
+                        </div>
+                      )
                     ) : (
                       <div className="text-center text-gray-500 py-8">
-                        Content for {sections[5].title} is not available yet.
+                        Login to view Content .
                       </div>
                     )}
                   </div>
@@ -536,29 +548,37 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={7}
                     />
-                    {assessment.length !== 0 ? (
-                      assessment.map((item, index) => (
-                        <AssessmentItem
-                          key={index}
-                          link={
-                            item.formData === null ? "" : item.formData.link
-                          }
-                          deadline={
-                            item.formData === null ? "" : item.formData.deadline
-                          }
-                          instruction={
-                            item.formData === null
-                              ? ""
-                              : item.formData.instruction
-                          }
-                          id={item._id}
-                          isAdmin={login}
-                          onDelete={handleDeleteAss}
-                        />
-                      ))
+                    {loginUser === true || login === true ? (
+                      assessment.length !== 0 ? (
+                        assessment.map((item, index) => (
+                          <AssessmentItem
+                            key={index}
+                            link={
+                              item.formData === null ? "" : item.formData.link
+                            }
+                            deadline={
+                              item.formData === null
+                                ? ""
+                                : item.formData.deadline
+                            }
+                            instruction={
+                              item.formData === null
+                                ? ""
+                                : item.formData.instruction
+                            }
+                            id={item._id}
+                            isAdmin={login}
+                            onDelete={handleDeleteAss}
+                          />
+                        ))
+                      ) : (
+                        <div className="text-center text-gray-500 py-8">
+                          Content for {sections[6].title} is not available yet.
+                        </div>
+                      )
                     ) : (
                       <div className="text-center text-gray-500 py-8">
-                        Content for {sections[6].title} is not available yet.
+                        Login to view Content .
                       </div>
                     )}
                   </div>

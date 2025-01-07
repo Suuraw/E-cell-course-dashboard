@@ -6,18 +6,32 @@ import CourseUpdateDiaglogBox from "../dialogboxAndForms/CourseUpdate";
 import ScheduleDialog from "../dialogboxAndForms/Schedule";
 import Leaderboard from "../dialogboxAndForms/LeaderboardDialog";
 import LoginDialog from "../dialogboxAndForms/Login";
+import user from "../../assets/user.png";
+import admin from "../../assets/user-gear.png";
+import LoginDialogUser from "../dialogboxAndForms/LoginUser";
 interface SidebarProps {
   openSection: number | null;
   toggleSection: (index: number) => void;
-  updateLoginStatus:(status: boolean) => void;
-  login:boolean;
+  updateLoginStatus: (status: boolean) => void;
+  login: boolean;
+  loginUser: boolean;
+  updateLoginStatusUser: (status: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection,updateLoginStatus,login }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  openSection,
+  toggleSection,
+  updateLoginStatus,
+  login,
+  loginUser,
+  updateLoginStatusUser
+}) => {
   const [courseUpdateBtn, updateCourseBtn] = useState(false);
   const [scheduleBtn, updateScheduleBtn] = useState(false);
   const [isModelOpen, setIsModalOpen] = useState(false);
-  const [isOpen,setOpenClose]=useState(false);
+  const [isOpen, setOpenClose] = useState(false);
+  const [isOpenUser, setOpenCloseUser] = useState(false);
+
   const handleClickForCourseUpdate = () => {
     updateCourseBtn((prev) => !prev);
   };
@@ -31,22 +45,46 @@ const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection,updateLogi
   return (
     <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col ">
       <div className="p-4 flex-shrink-0">
-        <Button className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
-         onClick={()=>setOpenClose((prev)=>!prev)}>
+        <Button
+          className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
+          onClick={() => setOpenClose((prev) => !prev)}
+        >
           <img
             width="20"
             height="20"
-            src="https://img.icons8.com/color/48/google-logo.png"
+            src={admin}
             alt="google-logo"
             className="mr-2"
           />
           Login as Admin
         </Button>
-        {isOpen&&<LoginDialog
-        setOpenClose={setOpenClose}
-        updateLoginStatus={updateLoginStatus}
-        login={login}
-        />}
+        <Button
+          className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
+          onClick={() => setOpenCloseUser((prev) => !prev)}
+        >
+          <img
+            width="20"
+            height="20"
+            src={user}
+            alt="google-logo"
+            className="mr-2"
+          />
+          Login as Users
+        </Button>
+        {isOpen && (
+          <LoginDialog
+            setOpenClose={setOpenClose}
+            updateLoginStatus={updateLoginStatus}
+            login={login}
+          />
+        )}
+        {isOpenUser && (
+          <LoginDialogUser
+            setOpenCloseUser={setOpenCloseUser}
+            updateLoginStatusUser={updateLoginStatusUser}
+            loginUser={loginUser}
+          />
+        )}
       </div>
 
       <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
@@ -99,7 +137,10 @@ const Sidebar: React.FC<SidebarProps> = ({ openSection, toggleSection,updateLogi
                 />
               </div>
             </div>
-            <div className="flex items-center  p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors" onClick={()=>toggleSection(6)}>
+            <div
+              className="flex items-center  p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors"
+              onClick={() => toggleSection(6)}
+            >
               <span className="text-xl p-1 rounded-md bg-white shadow-sm">
                 {menuItems[3].icon}
               </span>

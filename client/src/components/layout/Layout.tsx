@@ -13,15 +13,20 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [openSection, setOpenSection] = useState<number | null>(null);
   const [login, updateLoginStatus] = useState(false);
+  const [loginUser, updateLoginStatusUser] = useState(false);
+
   const [editState, updateEditState] = useState(false);
   const toggleSection = (index: number) => {
-    setOpenSection(openSection === index ? null : index);
-   
+    setOpenSection(openSection === index ? null : index); 
   };
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token")&&localStorage.getItem("userType")==="admin") {
       updateLoginStatus(true);
     }
+    if(localStorage.getItem("token")&&localStorage.getItem("userType")==="user"){
+      updateLoginStatusUser(true);
+    }
+
   }, []);
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -30,6 +35,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         toggleSection={toggleSection}
         updateLoginStatus={updateLoginStatus}
         login={login}
+        loginUser={loginUser}
+        updateLoginStatusUser={updateLoginStatusUser}
       />
 
       <div className="flex-1 flex">
@@ -40,6 +47,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               toggleSection={toggleSection}
               updateLoginStatus={updateLoginStatus}
               login={login}
+              loginUser={loginUser}
+              updateLoginStatusUser={updateLoginStatusUser}
             />
           </div>
         </div>
@@ -56,6 +65,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               login={login}
               editState={editState}
               updateEditState={updateEditState}
+              loginUser={loginUser}
             />
           </div>
           <div className="p-4">

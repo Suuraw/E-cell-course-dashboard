@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import ReatDom from "react-dom";
 import { AnimatePresence } from "framer-motion";
 import { AnimatedAlert } from "../animation/AnimatedAlert";
-// const BACKEND_URL = import.meta.env.VITE_SERVER_URL+"/admin/login" || "http://localhost:3000";
-const BACKEND_URL= "http://localhost:3000/auth/login";
+const BACKEND_URL = import.meta.env.VITE_SERVER_URL+"/auth/userLogin" || "http://localhost:3000/auth/userLogin";
+
+
 interface LoginDialogProps {
   // isOpen: boolean;
-  login: boolean;
-  updateLoginStatus: (status: boolean) => void;
-  setOpenClose: React.Dispatch<React.SetStateAction<boolean>>;
+  loginUser: boolean;
+  updateLoginStatusUser: (status: boolean) => void;
+  setOpenCloseUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginDialog: React.FC<LoginDialogProps> = ({
-  setOpenClose,
-  updateLoginStatus,
-  login,
+const LoginDialogUser: React.FC<LoginDialogProps> = ({
+  setOpenCloseUser,
+  updateLoginStatusUser,
+  loginUser,
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,17 +35,17 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
     if (response.ok) {
       setLoginStatus('success');
       localStorage.setItem("token", data.token);
-      localStorage.setItem("userType", "admin");
+      localStorage.setItem("userType", "user");
       
       setTimeout(() => {
-        setOpenClose(false);
-        updateLoginStatus(true);
+        setOpenCloseUser(false);
+        updateLoginStatusUser(true);
       }, 1000);
     } else {
       setLoginStatus('error');
     }
   };
-  if (login) return null;
+  if (loginUser) return null;
   return ReatDom.createPortal(
     <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
@@ -91,7 +92,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
           </button>
         </form>
         <button
-          onClick={() => setOpenClose((prev) => !prev)}
+          onClick={() => setOpenCloseUser((prev) => !prev)}
           className="mt-4 w-full text-center text-blue-500 hover:underline"
         >
           Cancel
@@ -110,4 +111,4 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
   );
 };
 
-export default LoginDialog;
+export default LoginDialogUser;

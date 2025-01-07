@@ -117,3 +117,56 @@
     @apply bg-background text-foreground;
   }
 }
+.sliding-text-container {
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+}
+
+.sliding-text-wrapper {
+  display: flex;
+  animation: slide-loop 12s ease-in-out infinite;
+  width: 100%; 
+}
+
+.sliding-text {
+  display: inline-block;
+  font-size: 16px;
+  color: #ffffff;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+}
+
+@keyframes slide-loop {
+  0% {
+    transform: translateX(100%); 
+  }
+  50% {
+    transform: translateX(0); 
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Gradient for better appearance */
+.sliding-text-container::before,
+.sliding-text-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  z-index: 2;
+}
+
+.sliding-text-container::before {
+  left: 0;
+  background: linear-gradient(to right, black, transparent);
+}
+
+.sliding-text-container::after {
+  right: 0;
+  background: linear-gradient(to left, black, transparent);
+}
