@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { AnimatedAlert } from "../animation/AnimatedAlert";
-const BACKEND_URL=import.meta.env.VITE_SERVER_URL|| "http://localhost:3000";
+
+const BACKEND_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
+
 interface CapstoneProps {
-    editState: boolean;
-    updateEditState: (newState: boolean) => void;
-    endpoint:string;
-  }
+  editState: boolean;
+  updateEditState: (newState: boolean) => void;
+  endpoint: string;
+}
 
 interface FormData {
   link: string;
@@ -25,28 +27,32 @@ export default function CapstoneForm({
     instruction: "",
   });
 
-  const handleSubmit = async(e: React.FormEvent) => {
-    console.log(formData);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(formData);
     try {
-        const response = await fetch(`${BACKEND_URL}/api/${endpoint}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ formData }),
-        });
-        const result = await response.json();
-        if (result) alert("SUCCESSFULL SUBMISSION");
-        window.location.reload();
-        updateSubmit(true);
-      } catch (error) {
-        
-        alert(endpoint);
+      const response = await fetch(`${BACKEND_URL}/api/${endpoint}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formData }),
+      });
+      const result = await response.json();
+
+      if (result) {
+        updateSubmit(true); 
+        setTimeout(() => {
+          window.location.reload(); 
+        }, 2000); 
       }
-    updateSubmit(true)
-    setFormData({ link: "", deadline: "", instruction: "" }); // Reset form
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("Submission failed. Please try again.");
+    }
+
+    setFormData({ link: "", deadline: "", instruction: "" });
   };
 
-  if (!editState || submit) return null;
+  if (!editState) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -123,10 +129,9 @@ export default function CapstoneForm({
           </form>
         </div>
       </div>
-      {
-
-      <AnimatedAlert message="Submission Successful" type="success" />
-      }
+      {submit && (
+        <AnimatedAlert message="Submission Successful" type="success" />
+      )}
     </div>
   );
 }

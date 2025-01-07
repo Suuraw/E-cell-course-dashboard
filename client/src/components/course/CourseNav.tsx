@@ -12,7 +12,6 @@ interface CourseNavProps {
 
 const CourseNav: React.FC<CourseNavProps> = ({ login, editState, updateEditState,index }) => {
   var endpoint=`week${index+1}`
-  console.log(endpoint)
   return (
     <>
     {editState===true?<WeeklyForm

@@ -19,14 +19,14 @@ export const CapstoneItem: React.FC<CapstoneItemProps> = ({
   isAdmin,
   onDelete,
 }) => {
-  const [isRemoving, setIsRemoving] = useState(false); // For animation or transition effect
+  const [isRemoving, setIsRemoving] = useState(false); 
 
   const handleDelete = async () => {
     console.log("Delete Button is clicked");
-    setIsRemoving(true); // Trigger animation or feedback
+    setIsRemoving(true); 
     try {
       await deleteCapstoneData(id);
-      onDelete(id); // Notify parent to update the state
+      onDelete(id); 
     } catch (error) {
       console.error("Error deleting item:", error);
     }

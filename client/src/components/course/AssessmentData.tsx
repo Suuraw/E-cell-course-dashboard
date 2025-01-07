@@ -8,7 +8,7 @@ interface CapstoneItemProps {
   instruction: string;
   id: string;
   isAdmin: boolean;
-  onDelete: (id: string) => void; // Callback to handle parent state update
+  onDelete: (id: string) => void; 
 }
 
 export const AssessmentItem: React.FC<CapstoneItemProps> = ({
@@ -19,15 +19,15 @@ export const AssessmentItem: React.FC<CapstoneItemProps> = ({
   isAdmin,
   onDelete,
 }) => {
-  const [isRemoving, setIsRemoving] = useState(false); // For animation or transition effect
+  const [isRemoving, setIsRemoving] = useState(false);
 
   const handleDelete = async () => {
     console.log("Delete Button is clicked");
-    setIsRemoving(true); // Trigger animation or feedback
+    setIsRemoving(true); 
     try {
       await deleteAssessmentData(id);
       console.log("Deleted");
-      onDelete(id); // Notify parent to update the state
+      onDelete(id);
     } catch (error) {
       console.error("Error deleting item:", error);
     }

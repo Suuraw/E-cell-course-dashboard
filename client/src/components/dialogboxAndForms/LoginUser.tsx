@@ -6,7 +6,6 @@ const BACKEND_URL = import.meta.env.VITE_SERVER_URL+"/auth/userLogin" || "http:/
 
 
 interface LoginDialogProps {
-  // isOpen: boolean;
   loginUser: boolean;
   updateLoginStatusUser: (status: boolean) => void;
   setOpenCloseUser: React.Dispatch<React.SetStateAction<boolean>>;
