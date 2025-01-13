@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from "../ui/button";
 import Sidebar from './Sidebar';
-
+import CohortImg from "../../assets/Cohort Logo final.png"
 
 interface NavbarProps {
   openSection: number | null;
@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ openSection, toggleSection, updateLogin
       <nav className="sticky top-0 bg-black text-white shadow-md z-10">
         <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
-            <span className="text-lg md:text-xl font-bold">E-CELL</span>
+            <span className="text-lg md:text-xl font-bold"><img src={CohortImg} width="100px"></img></span>
             <div className="flex-1 overflow-hidden relative sliding-text-container">
               <div className="sliding-text-wrapper">
                 <span key={currentMessageIndex} className="sliding-text">

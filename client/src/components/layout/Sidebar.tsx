@@ -44,15 +44,15 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
   const handleLoginToggle = (userType: string) => {
     if (userType === "admin") {
-      setOpenClose(!isOpen); // Admin login modal toggle
+      setOpenClose(!isOpen);
       if (login) {
-        updateLoginStatus(false); // Admin logout
+        updateLoginStatus(false); 
         localStorage.clear();
       }
     } else if (userType === "user") {
-      setOpenCloseUser(!isOpenUser); // User login modal toggle
+      setOpenCloseUser(!isOpenUser); 
       if (loginUser) {
-        updateLoginStatusUser(false); // User logout
+        updateLoginStatusUser(false); 
         localStorage.clear();
       }
     }
