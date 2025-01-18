@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Disc as Discord } from "lucide-react";
 import { Button } from "../ui/button";
 import { menuItems, courseContents } from "../data/sidebarData";
 import CourseUpdateDiaglogBox from "../dialogboxAndForms/CourseUpdate";
@@ -9,6 +9,7 @@ import LoginDialog from "../dialogboxAndForms/Login";
 import user from "../../assets/user.png";
 import admin from "../../assets/user-gear.png";
 import LoginDialogUser from "../dialogboxAndForms/LoginUser";
+
 interface SidebarProps {
   openSection: number | null;
   toggleSection: (index: number) => void;
@@ -24,7 +25,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   updateLoginStatus,
   login,
   loginUser,
-  updateLoginStatusUser
+  updateLoginStatusUser,
 }) => {
   const [courseUpdateBtn, updateCourseBtn] = useState(false);
   const [scheduleBtn, updateScheduleBtn] = useState(false);
@@ -46,36 +47,49 @@ const Sidebar: React.FC<SidebarProps> = ({
     if (userType === "admin") {
       setOpenClose(!isOpen);
       if (login) {
-        updateLoginStatus(false); 
+        updateLoginStatus(false);
         localStorage.clear();
       }
     } else if (userType === "user") {
-      setOpenCloseUser(!isOpenUser); 
+      setOpenCloseUser(!isOpenUser);
       if (loginUser) {
-        updateLoginStatusUser(false); 
+        updateLoginStatusUser(false);
         localStorage.clear();
       }
     }
-};
+  };
 
   return (
-    <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col ">
+    <aside className="bg-gray-100 h-full border-r border-gray-200 flex flex-col">
       <div className="p-4 flex-shrink-0">
-        {!loginUser&&<Button
-          className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
-          onClick={() => handleLoginToggle("admin")}
+        {!loginUser && (
+          <Button
+            className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
+            onClick={() => handleLoginToggle("admin")}
+          >
+            <img
+              width="20"
+              height="20"
+              src={admin}
+              alt="google-logo"
+              className="mr-2"
+            />
+            {login ? "Logout" : "Login as Admin"}
+          </Button>
+        )}
+
+        <a
+          href="https://discord.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 w-full mb-4 bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 shadow-lg hover:shadow-xl"
         >
-          <img
-            width="20"
-            height="20"
-            src={admin}
-            alt="google-logo"
-            className="mr-2"
-          />
-          {login ? "Logout" : "Login as Admin"}
-        </Button>}
+          <Discord className="w-5 h-5" />
+          <span>Join Discord Server</span>
+        </a>
+
         <Button
-          className="w-full mb-4 mt-5 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
+          className="w-full mb-4 bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors"
           onClick={() => handleLoginToggle("user")}
         >
           <img
@@ -94,6 +108,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             login={login}
           />
         )}
+
         {isOpenUser && (
           <LoginDialogUser
             setOpenCloseUser={setOpenCloseUser}
@@ -106,7 +121,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
         <nav className="p-4 space-y-6">
           <div className="space-y-2">
-            <div className="flex items-center  p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors">
+            <div className="flex items-center p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors">
               <span className="text-xl p-1 rounded-md bg-white shadow-sm">
                 {menuItems[0].icon}
               </span>
@@ -121,7 +136,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 updateCourseBtn={updateCourseBtn}
               />
             </div>
-            <div className="flex items-center  p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors">
+            <div className="flex items-center p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors">
               <span className="text-xl p-1 rounded-md bg-white shadow-sm">
                 {menuItems[1].icon}
               </span>
@@ -137,7 +152,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               />
             </div>
             <div>
-              <div className="flex items-center  p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors">
+              <div className="flex items-center p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors">
                 <span className="text-xl p-1 rounded-md bg-white shadow-sm">
                   {menuItems[2].icon}
                 </span>
@@ -154,7 +169,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               </div>
             </div>
             <div
-              className="flex items-center  p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors"
+              className="flex items-center p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors"
               onClick={() => toggleSection(6)}
             >
               <span className="text-xl p-1 rounded-md bg-white shadow-sm">
@@ -172,14 +187,14 @@ const Sidebar: React.FC<SidebarProps> = ({
             <h3 className="text-gray-500 text-xs font-semibold mb-3 uppercase tracking-wider">
               Course Contents
             </h3>
-            <div className="space-y-1 mb-12">
+            <div className="space-y-1">
               {courseContents.map((content, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-between p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors"
                   onClick={() => toggleSection(index)}
                 >
-                  <div className="flex items-center ">
+                  <div className="flex items-center">
                     <span className="text-lg bg-white p-1 rounded-md shadow-sm">
                       {content.icon}
                     </span>

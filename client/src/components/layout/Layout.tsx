@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import CourseAnnouncement from "../course/CourseAnnouncement";
-import  Dashboard  from "../course/Dashboard";
+import Dashboard from "../course/Dashboard";
 import Footer from "./Footer";
-
+import DescriptionBox from "./DescriptioBox";
+import TaskApp from "./TaskApp";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -17,20 +18,25 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const [editState, updateEditState] = useState(false);
   const toggleSection = (index: number) => {
-    setOpenSection(openSection === index ? null : index); 
+    setOpenSection(openSection === index ? null : index);
   };
   useEffect(() => {
-    if (localStorage.getItem("token")&&localStorage.getItem("userType")==="admin") {
+    if (
+      localStorage.getItem("token") &&
+      localStorage.getItem("userType") === "admin"
+    ) {
       updateLoginStatus(true);
     }
-    if(localStorage.getItem("token")&&localStorage.getItem("userType")==="user"){
+    if (
+      localStorage.getItem("token") &&
+      localStorage.getItem("userType") === "user"
+    ) {
       updateLoginStatusUser(true);
     }
-
   }, []);
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar 
+      <Navbar
         openSection={openSection}
         toggleSection={toggleSection}
         updateLoginStatus={updateLoginStatus}
@@ -58,6 +64,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <CourseAnnouncement />
           </div>
 
+          <div className="max-w-3xl mx-auto">
+            <DescriptionBox title="Welcome to Our Course" description="xyzzz" />
+          </div>
+
           <div className="p-4">
             <Dashboard
               openSection={openSection}
@@ -68,6 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               loginUser={loginUser}
             />
           </div>
+          <TaskApp />
           <div className="p-4">
             <Footer />
           </div>
@@ -76,7 +87,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </div>
     </div>
-   
   );
 };
 
