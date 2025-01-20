@@ -13,32 +13,56 @@ interface PlaceholderProps {
 
 export const Placeholder: React.FC<PlaceholderProps> = ({ day, description, tasks }) => {
   return (
-    <div className="border border-gray-300 rounded-lg my-4 p-4">
-      <div className="flex flex-col md:flex-row my-4">
-        <div className="w-full md:w-20 mx-2 mb-2 md:mb-0">
-          <span className="font-bold">{day}</span>
+    <div>
+      <div className="border border-gray-300 rounded-lg my-4 p-4">
+        <div className="flex flex-col md:flex-row my-4">
+          <div className="w-full md:w-20 mx-2 mb-2 md:mb-0">
+            <span className="font-bold">Description</span>
+          </div>
+          <div className="md:w-full md:pl-10 mb-4 md:mb-0">
+            <p className="text-sm">{description}</p>
+          </div>
         </div>
-        <div className="w-full md:w-60 md:pl-10 mb-4 md:mb-0">
-          <p className="text-sm ">{description}</p>
+      </div>
+
+      <div className="border border-gray-300 rounded-lg my-4 p-4">
+        <div className="flex flex-col md:flex-row my-4">
+          <div className="w-full md:w-20 mx-2 mb-2 md:mb-0">
+            <span className="font-bold">Resources</span>
+          </div>
+          <div className="md:w-full md:pl-10 mb-4 md:mb-0">
+            <p className="text-sm">Some Resources</p>
+          </div>
         </div>
-        <div className="flex flex-col md:flex-row flex-wrap">
-          {tasks.map((task, index) => (
-            <div key={index} className="w-full md:flex-1">
-              {task.topics.map((topic, idx) => (
-                <div key={idx} className="mx-2 md:pl-10 mb-2">
-                  <a
-                    href={topic.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-semibold text-blue-600 hover:text-blue-800"
+      </div>
+
+      <div className="border border-gray-300 rounded-lg my-4 p-4">
+        <div className="flex flex-col md:flex-row my-4">
+          <div className="w-full md:w-20 mx-2 mb-2 md:mb-0">
+            <span className="font-bold">Tasks</span>
+          </div>
+          <div className="md:w-full md:pl-10 mb-4 md:mb-0">
+            <p className="text-sm">
+              {/* Currently only using the first item of the array for testing
+                Use entire array in prod
+              */}
+              {tasks[0].topics.map((topic, index) => (
+                <div key={index}>
+                  <a 
+                  href={topic.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-blue-600 hover:text-blue-800'
                   >
-                    {topic.name}
+                  {topic.name}
                   </a>
                 </div>
               ))}
-            </div>
-          ))}
+            </p>
+          </div>
         </div>
+        <hr className='mt-4'/>
+        <p className='px-1 mt-2 text-[0.85rem] font-semibold'>Due By: 24th Jan</p>
       </div>
     </div>
   );

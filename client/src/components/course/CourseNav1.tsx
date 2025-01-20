@@ -9,7 +9,7 @@ interface CourseNavProps {
 }
 
 const CourseNav1: React.FC<CourseNavProps> = ({ login, editState, updateEditState,index }) => {
-  var endpoint=``
+  let endpoint=``
   if(index===7)
     endpoint=`assessment`
   else
@@ -21,16 +21,23 @@ const CourseNav1: React.FC<CourseNavProps> = ({ login, editState, updateEditStat
     editState={editState}
     endpoint={endpoint}
     />:null}
-    <nav className="bg-blue-600 text-white p-4 flex items-center space-x-8 rounded-t-lg">
+
+    {/* Previous header code */}
+    {/* <nav className="bg-blue-600 text-white p-4 flex items-center space-x-8 rounded-t-lg">
       <div className="font-bold">LINK</div>
       <div className="flex-1 flex justify-around">
         <div className="font-semibold">DEADLINE</div>
         <div className="font-semibold">INSTRUCTION</div>
       </div>
-      {login && (
-        <button onClick={() => updateEditState(!editState)}><Pencil className="w-5 h-5" /></button>
+
+    </nav> */}
+    {login && (
+      <div className='w-full flex flex-row justify-end'>
+        <button onClick={() => updateEditState(!editState)}>
+          <Pencil className="w-5 h-4 items-end"/>
+        </button>
+      </div>
       )}
-    </nav>
     </>
   );
 };

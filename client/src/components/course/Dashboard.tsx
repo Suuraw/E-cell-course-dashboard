@@ -77,6 +77,7 @@ const Dashboard: React.FC<DashboardProps> = ({
     const fetchData = async () => {
       try {
         const week1Data = await getWeek1Data();
+        console.log(week1Data)
         const week2Data = await getWeek2Data();
         const week3Data = await getWeek3Data();
         const week4Data = await getWeek4Data();
@@ -144,7 +145,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <button
             className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
               openSection === 0
-                ? "text-blue-600 bg-blue-50"
+                ? "text-blue-50 bg-gradient-to-r from-indigo-800 to-[#2865e0]"
                 : "text-black hover:bg-gray-100"
             }`}
             onClick={() => handleToggleSection(0)}
@@ -166,7 +167,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="border-t border-gray-100 bg-white p-4">
+                <div className="border-t border-gray-100 bg-white py-2 px-4">
                   <div className="overflow-x-auto sm:overflow-x-hidden">
                     <CourseNav
                       login={login}
@@ -179,14 +180,20 @@ const Dashboard: React.FC<DashboardProps> = ({
                     week1.weekData &&
                     week1.weekData[0] &&
                     week1.weekData[0].description !== "" ? (
-                      week1.weekData.map((day, idx) => (
-                        <Placeholder
-                          key={idx}
-                          day={day.day}
-                          description={day.description}
-                          tasks={day.tasks}
-                        />
-                      ))
+                      // week1.weekData.map((day, idx) => (
+                      //   <Placeholder
+                      //     key={idx}
+                      //     day={day.day}
+                      //     description={day.description}
+                      //     tasks={day.tasks}
+                      //   />
+                      // ))
+                      <Placeholder
+                        key={0}
+                        day={week1.weekData[0].day}
+                        description= {"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris."}//{week1.weekData[0].description}
+                        tasks={week1.weekData[0].tasks}
+                      />
                     ) : (
                       <div className="text-center text-gray-500 py-8">
                         Content for {sections[0].title} is not available yet.
@@ -194,6 +201,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                     )}
                   </div>
                 </div>
+
               </motion.div>
             )}
           </AnimatePresence>
@@ -204,7 +212,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <button
             className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
               openSection === 1
-                ? "text-blue-600 bg-blue-50"
+                ? "text-blue-50 bg-gradient-to-r from-indigo-800 to-[#2865e0]"
                 : "text-black hover:bg-gray-100"
             }`}
             onClick={() => handleToggleSection(1)}
@@ -264,7 +272,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <button
             className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
               openSection === 2
-                ? "text-blue-600 bg-blue-50"
+                ? "text-blue-50 bg-gradient-to-r from-indigo-800 to-[#2865e0]"
                 : "text-black hover:bg-gray-100"
             }`}
             onClick={() => handleToggleSection(2)}
@@ -324,7 +332,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <button
             className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
               openSection === 3
-                ? "text-blue-600 bg-blue-50"
+                ? "text-blue-50 bg-gradient-to-r from-indigo-800 to-[#2865e0]"
                 : "text-black hover:bg-gray-100"
             }`}
             onClick={() => handleToggleSection(3)}
@@ -384,7 +392,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <button
             className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
               openSection === 4
-                ? "text-blue-600 bg-blue-50"
+                ? "text-blue-50 bg-gradient-to-r from-indigo-800 to-[#2865e0]"
                 : "text-black hover:bg-gray-100"
             }`}
             onClick={() => handleToggleSection(4)}
@@ -443,7 +451,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <button
             className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
               openSection === 5
-                ? "text-blue-600 bg-blue-50"
+                ? "text-blue-50 bg-gradient-to-r from-indigo-800 to-[#2865e0]"
                 : "text-black hover:bg-gray-100"
             }`}
             onClick={() => handleToggleSection(5)}
@@ -518,7 +526,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <button
             className={`flex w-full items-center justify-between p-4 text-left transition-colors duration-200 ${
               openSection === 6
-                ? "text-blue-600 bg-blue-50"
+                ? "text-blue-50 bg-gradient-to-r from-indigo-800 to-[#2865e0]"  
                 : "text-black hover:bg-gray-100"
             }`}
             onClick={() => handleToggleSection(6)}
@@ -548,7 +556,13 @@ const Dashboard: React.FC<DashboardProps> = ({
                       updateEditState={updateEditState}
                       index={7}
                     />
-                    {loginUser === true || login === true ? (
+
+                    {/* Data hard coded inside AssessmentItem
+                        Remove during prod and add relevant props
+                    */}
+
+                    <AssessmentItem/>
+                    {/* {loginUser === true || login === true ? (
                       assessment.length !== 0 ? (
                         assessment.map((item, index) => (
                           <AssessmentItem
@@ -580,7 +594,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       <div className="text-center text-gray-500 py-8">
                         Login to view Content .
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </motion.div>
