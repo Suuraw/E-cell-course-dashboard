@@ -137,7 +137,7 @@ export const deleteCapstoneData=async(id:string)=>{
       return "Some error occured";
     }
   } catch (error) {
-   console.log('ERROR')
+   console.log('ERROR: ', error)
  }
 }
 
@@ -154,6 +154,6 @@ export const deleteAssessmentData=async(id:string)=>{
       return "Some error occured";
     }
   } catch (error) {
-    console.log('ERROR')
+    console.log('ERROR: ', error)
  }
 }
