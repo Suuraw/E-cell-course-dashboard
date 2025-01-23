@@ -24,9 +24,14 @@ interface DashboardProps {
   editState: boolean;
   updateEditState: (newState: boolean) => void;
   loginUser: boolean;
+  // isAdmin:boolean;
 }
 
 interface Task {
+  name: string;
+  topics: { name: string; link: string }[];
+}
+interface Resource {
   name: string;
   topics: { name: string; link: string }[];
 }
@@ -35,6 +40,8 @@ interface DayData {
   day: string;
   description: string;
   tasks: Task[];
+  resources:Resource[];
+  dueDate:string;
 }
 type CapstoneProject = {
   _id: string;
@@ -77,14 +84,14 @@ const Dashboard: React.FC<DashboardProps> = ({
     const fetchData = async () => {
       try {
         const week1Data = await getWeek1Data();
-        console.log(week1Data)
+        console.log(week1?.weekData)
         const week2Data = await getWeek2Data();
         const week3Data = await getWeek3Data();
         const week4Data = await getWeek4Data();
         const week5Data = await getWeek5Data();
         const capstoneData = await getCapstoneData();
         const assessmentData = await getAssessmentData();
-        console.log("Hello world");
+       
         if (week1Data === null) {
           alert("Database is empty");
         } else {
@@ -191,8 +198,10 @@ const Dashboard: React.FC<DashboardProps> = ({
                       <Placeholder
                         key={0}
                         day={week1.weekData[0].day}
-                        description= {"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris."}//{week1.weekData[0].description}
+                        description= {week1.weekData[0].description}
                         tasks={week1.weekData[0].tasks}
+                        resources={week1.weekData[0].resources}
+                        dueDate={week1.weekData[0].dueDate}
                       />
                     ) : (
                       <div className="text-center text-gray-500 py-8">
@@ -241,20 +250,22 @@ const Dashboard: React.FC<DashboardProps> = ({
                       editState={editState}
                       updateEditState={updateEditState}
                       index={openSection}
+            
                     />
                     {week2 !== null &&
                     week2 !== undefined &&
                     week2.weekData &&
                     week2.weekData[0] &&
                     week2.weekData[0].description !== "" ? (
-                      week2.weekData.map((day, idx) => (
+                    
                         <Placeholder
-                          key={idx}
-                          day={day.day}
-                          description={day.description}
-                          tasks={day.tasks}
-                        />
-                      ))
+                        key={1}
+                        day={week2.weekData[0].day}
+                        description= {week2.weekData[0].description}
+                        tasks={week2.weekData[0].tasks}
+                        resources={week2.weekData[0].resources}
+                        dueDate={week2.weekData[0].dueDate}
+                      />
                     ) : (
                       <div className="text-center text-gray-500 py-8">
                         Content for {sections[1].title} is not available yet.
@@ -307,12 +318,14 @@ const Dashboard: React.FC<DashboardProps> = ({
                     week3.weekData &&
                     week3.weekData[0] &&
                     week3.weekData[0].description !== "" ? (
-                      week3.weekData.map((day, idx) => (
+                      week3.weekData.map(() => (
                         <Placeholder
-                          key={idx}
-                          day={day.day}
-                          description={day.description}
-                          tasks={day.tasks}
+                        key={2}
+                        day={week3.weekData[0].day}
+                        description= {week3.weekData[0].description}
+                        tasks={week3.weekData[0].tasks}
+                        resources={week3.weekData[0].resources}
+                        dueDate={week3.weekData[0].dueDate}
                         />
                       ))
                     ) : (
@@ -368,14 +381,14 @@ const Dashboard: React.FC<DashboardProps> = ({
                     week4.weekData &&
                     week4.weekData[0] &&
                     week4.weekData[0].description !== "" ? (
-                      week4.weekData.map((day, idx) => (
                         <Placeholder
-                          key={idx}
-                          day={day.day}
-                          description={day.description}
-                          tasks={day.tasks}
+                        key={3}
+                        day={week4.weekData[0].day}
+                        description= {week4.weekData[0].description}
+                        tasks={week4.weekData[0].tasks}
+                        resources={week4.weekData[0].resources}
+                        dueDate={week4.weekData[0].dueDate}
                         />
-                      ))
                     ) : (
                       <div className="text-center text-gray-500 py-8">
                         Content for {sections[3].title} is not available yet.
@@ -427,14 +440,16 @@ const Dashboard: React.FC<DashboardProps> = ({
                     week5.weekData &&
                     week5.weekData[0] &&
                     week5.weekData[0].description !== "" ? (
-                      week5.weekData.map((day, idx) => (
-                        <Placeholder
-                          key={idx}
-                          day={day.day}
-                          description={day.description}
-                          tasks={day.tasks}
-                        />
-                      ))
+                     
+                      <Placeholder
+                      key={4}
+                      day={week5.weekData[0].day}
+                      description= {week5.weekData[0].description}
+                      tasks={week5.weekData[0].tasks}
+                      resources={week5.weekData[0].resources}
+                      dueDate={week5.weekData[0].dueDate}
+                    />
+               
                     ) : (
                       <div className="text-center text-gray-500 py-8">
                         Content for {sections[4].title} is not available yet.
@@ -561,8 +576,8 @@ const Dashboard: React.FC<DashboardProps> = ({
                         Remove during prod and add relevant props
                     */}
 
-                    <AssessmentItem/>
-                    {/* {loginUser === true || login === true ? (
+                    
+                    {loginUser === true || login === true ? (
                       assessment.length !== 0 ? (
                         assessment.map((item, index) => (
                           <AssessmentItem
@@ -572,7 +587,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                             }
                             deadline={
                               item.formData === null
-                                ? ""
+                                ? "" 
                                 : item.formData.deadline
                             }
                             instruction={
@@ -594,7 +609,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                       <div className="text-center text-gray-500 py-8">
                         Login to view Content .
                       </div>
-                    )} */}
+                    )}
                   </div>
                 </div>
               </motion.div>

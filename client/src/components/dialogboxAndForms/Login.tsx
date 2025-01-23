@@ -20,28 +20,35 @@ const LoginDialog: React.FC<LoginDialogProps> = ({
 
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
-    const response = await fetch(`${BACKEND_URL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await response.json();
-
-    if (response.ok) {
-      setLoginStatus('success');
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userType", "admin");
-      
-      setTimeout(() => {
-        setOpenClose(false);
-        updateLoginStatus(true);
-      }, 1000);
-    } else {
+    try {
+      const response = await fetch(`${BACKEND_URL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setLoginStatus('success');
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("token-life", "50hr");
+  
+        setTimeout(() => {
+          setOpenClose(false);
+          updateLoginStatus(true);
+        }, 1000);
+      } else {
+        setLoginStatus('error');
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
       setLoginStatus('error');
     }
   };
+
   if (login) return null;
   return ReatDom.createPortal(
     <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50 z-50">

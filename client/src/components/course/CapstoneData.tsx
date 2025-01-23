@@ -38,30 +38,35 @@ export const CapstoneItem: React.FC<CapstoneItemProps> = ({
         isRemoving ? "opacity-0 transition-opacity duration-500" : ""
       }`}
     >
-      <div className="flex flex-col md:flex-row justify-between items-center my-4">
-        <div className="flex flex-col md:flex-row flex-wrap w-full">
-          <div className="w-full md:w-1/4 mx-2 mb-2 md:mb-0">
+      <div className="flex flex-col md:flex-row justify-between items-start my-4">
+        {/* Left Section */}
+        <div className="flex flex-col w-full md:w-3/4 space-y-2">
+          <div>
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
               className="font-bold text-blue-600 hover:text-blue-800"
             >
-              {link}
+              Submission Link
             </a>
           </div>
-          <div className="w-full md:w-1/4 mx-2 mb-2 md:mb-0">
-            <span className="font-semibold">{deadline}</span>
+          <div className="text-sm">
+            <span className="font-bold">Deadline: </span>
+            <span className="ml-4 font-semibold">{deadline}</span>
           </div>
-          <div className="w-full md:w-1/3 mx-2 mb-2 md:mb-0">
-            <p className="font-semibold text-sm">{instruction}</p>
+          <div className="text-sm">
+            <span className="font-bold">Project Description: </span>
+            <span className="block text-justify mt-2 font-semibold">{instruction}</span>
           </div>
         </div>
+
+        {/* Delete Button for Admin */}
         {isAdmin && (
           <div className="ml-auto mt-2 md:mt-0">
             <button onClick={handleDelete} className="p-2">
               <i
-                className="pi pi-spin pi-trash"
+                className="pi  pi-trash"
                 style={{ fontSize: "1rem" }}
               ></i>
             </button>

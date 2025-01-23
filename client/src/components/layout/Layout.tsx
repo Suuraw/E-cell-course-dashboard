@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 // import CourseAnnouncement from "../course/CourseAnnouncement";
-import CourseAnnouncement from "../course/CourseAnnouncement";
 import Dashboard from "../course/Dashboard";
 import Footer from "./Footer";
 import DescriptionBox from "./DescriptionBox";
@@ -23,13 +22,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     if (
       localStorage.getItem("token") &&
-      localStorage.getItem("userType") === "admin"
+      localStorage.getItem("token-life") === "50hr"
     ) {
       updateLoginStatus(true);
     }
     if (
       localStorage.getItem("token") &&
-      localStorage.getItem("userType") === "user"
+      localStorage.getItem("token-life") === "20hr"
     ) {
       updateLoginStatusUser(true);
     }

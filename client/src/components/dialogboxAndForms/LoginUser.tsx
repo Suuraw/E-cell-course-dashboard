@@ -34,7 +34,7 @@ const LoginDialogUser: React.FC<LoginDialogProps> = ({
     if (response.ok) {
       setLoginStatus('success');
       localStorage.setItem("token", data.token);
-      localStorage.setItem("userType", "user");
+      localStorage.setItem("token-life", "20hr");
       
       setTimeout(() => {
         setOpenCloseUser(false);
