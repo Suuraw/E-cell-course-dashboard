@@ -60,9 +60,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ isModelOpen, setIsModelOpen }
                   ind === 0
                     ? "bg-yellow-200"
                     : ind === 1
-                    ? "bg-blue-100" // Highlight 2nd place
+                    ? "bg-blue-100"
                     : ind === 2
-                    ? "bg-green-100" // Highlight 3rd place
+                    ? "bg-green-100" 
                     : "bg-white"
                 }`}
               >

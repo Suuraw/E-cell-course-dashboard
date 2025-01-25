@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 // import CourseAnnouncement from "../course/CourseAnnouncement";
-import Dashboard from "../course/Dashboard";
+import Dashboard from "../course/Dashboard1";
 import Footer from "./Footer";
 import DescriptionBox from "./DescriptionBox";
 

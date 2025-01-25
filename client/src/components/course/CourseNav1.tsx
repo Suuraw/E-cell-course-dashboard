@@ -10,7 +10,7 @@ interface CourseNavProps {
 
 const CourseNav1: React.FC<CourseNavProps> = ({ login, editState, updateEditState,index }) => {
   let endpoint=``
-  if(index===7)
+  if(index===12)
     endpoint=`assessment`
   else
     endpoint=`capstone`;

@@ -194,7 +194,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <div
               className="flex items-center p-2 rounded-md hover:bg-gray-200 cursor-pointer transition-colors"
-              onClick={() => toggleSection(6)}
+              onClick={() => toggleSection(12)}
             >
               <span className="text-xl p-1 rounded-md">
                 {menuItems[3].icon}

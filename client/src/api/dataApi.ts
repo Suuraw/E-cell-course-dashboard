@@ -87,6 +87,96 @@ export const getWeek5Data=async()=> {
       throw new Error("Unable to fetch data from the API");
     }
   }
+  export const getWeek6Data=async()=> {
+    try {
+      const response = await axios.get(`${BACKEND_API}/week6Data`);
+      
+      if (response.data && response.data.weekData) {
+        return response;
+      } else {
+        console.log("Collection is Empty")
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching week data:", error);
+      throw new Error("Unable to fetch data from the API");
+    }
+  }
+  export const getWeek7Data=async()=> {
+    try {
+      const response = await axios.get(`${BACKEND_API}/week7Data`);
+      
+      if (response.data && response.data.weekData) {
+        return response;
+      } else {
+        console.log("Collection is Empty")
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching week data:", error);
+      throw new Error("Unable to fetch data from the API");
+    }
+  }
+  export const getWeek8Data=async()=> {
+    try {
+      const response = await axios.get(`${BACKEND_API}/week8Data`);
+      
+      if (response.data && response.data.weekData) {
+        return response;
+      } else {
+        console.log("Collection is Empty")
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching week data:", error);
+      throw new Error("Unable to fetch data from the API");
+    }
+  }
+  export const getWeek9Data=async()=> {
+    try {
+      const response = await axios.get(`${BACKEND_API}/week9Data`);
+      
+      if (response.data && response.data.weekData) {
+        return response;
+      } else {
+        console.log("Collection is Empty")
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching week data:", error);
+      throw new Error("Unable to fetch data from the API");
+    }
+  }
+  export const getWeek10Data=async()=> {
+    try {
+      const response = await axios.get(`${BACKEND_API}/week10Data`);
+      
+      if (response.data && response.data.weekData) {
+        return response;
+      } else {
+        console.log("Collection is Empty")
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching week data:", error);
+      throw new Error("Unable to fetch data from the API");
+    }
+  }
+  export const getWeek11Data=async()=> {
+    try {
+      const response = await axios.get(`${BACKEND_API}/week11Data`);
+      
+      if (response.data && response.data.weekData) {
+        return response;
+      } else {
+        console.log("Collection is Empty")
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching week data:", error);
+      throw new Error("Unable to fetch data from the API");
+    }
+  }
 
   // route for getting week 1 data
 export const getCapstoneData=async()=> {
@@ -104,7 +194,7 @@ export const getCapstoneData=async()=> {
       throw new Error("Unable to fetch data from the API");
     }
   }
-
+ 
   // route for getting week 1 data
 export const getAssessmentData=async()=> {
     try {

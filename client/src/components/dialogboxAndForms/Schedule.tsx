@@ -11,16 +11,7 @@ interface ScheduleProps {
   updateScheduleBtn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const scheduleData: ScheduleItem[] = [
-  { date: "02.12.2024", description: "Week 1 Release" },
-  { date: "07.12.2024", description: "Assignment 1 and Quiz 1 Release" },
-  { date: "09.12.2024", description: "Week 2 Release" },
-  { date: "14.12.2024", description: "Assignment 2 and Quiz 2 Release" },
-  { date: "16.12.2024", description: "Week 3 Release" },
-  { date: "21.12.2024", description: "Assignment 3 and Quiz 3 Release" },
-  { date: "23.12.2024", description: "Week 4 Release" },
-  { date: "28.12.2024", description: "Assignment 4 and Quiz 4 Release" },
-  { date: "30.12.2024", description: "Week 5 Release" },
-  { date: "04.01.2025", description: "Assignment 5 and Quiz 5 Release" },
+  { date: "25.1.2025", description: "Cohort Release" }
 ];
 
 const ScheduleDialog: React.FC<ScheduleProps> = ({
